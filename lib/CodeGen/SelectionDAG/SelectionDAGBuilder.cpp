@@ -2376,6 +2376,10 @@ void SelectionDAGBuilder::visitLandingPad(const LandingPadInst &LP) {
   setValue(&LP, Res);
 }
 
+void SelectionDAGBuilder::visitNOP(const NOPInst &SH) {
+  //TODO not sure what to do here
+}
+
 void SelectionDAGBuilder::sortAndRangeify(CaseClusterVector &Clusters) {
 #ifndef NDEBUG
   for (const CaseCluster &CC : Clusters)

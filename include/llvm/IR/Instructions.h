@@ -4919,6 +4919,31 @@ public:
   }
 };
 
+//===----------------------------------------------------------------------===//
+//                          NOPInst Class
+//===----------------------------------------------------------------------===//
+
+class NOPInst : public Instruction {
+protected:
+  friend class Instruction;
+  NOPInst *cloneImpl() const;
+
+public:
+  void *operator new(size_t s) {
+    return User::operator new(s, 0);
+  }
+
+  NOPInst(const NOPInst &other);
+  NOPInst(LLVMContext &C);
+  // Methods for support type inquiry through isa, cast, and dyn_cast:
+  static inline bool classof(const Instruction *I) {
+    return I->getOpcode() == NOP;
+  }
+  static inline bool classof(const Value *V) {
+    return isa<Instruction>(V) && classof(cast<Instruction>(V));
+  }
+};
+
 } // End llvm namespace
 
 #endif

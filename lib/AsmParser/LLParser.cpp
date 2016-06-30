@@ -5023,6 +5023,7 @@ int LLParser::ParseInstruction(Instruction *&Inst, BasicBlock *BB,
   case lltok::kw_shufflevector:  return ParseShuffleVector(Inst, PFS);
   case lltok::kw_phi:            return ParsePHI(Inst, PFS);
   case lltok::kw_landingpad:     return ParseLandingPad(Inst, PFS);
+  case lltok::kw_nop:            return ParseNOP(Inst, PFS);
   // Call.
   case lltok::kw_call:     return ParseCall(Inst, PFS, CallInst::TCK_None);
   case lltok::kw_tail:     return ParseCall(Inst, PFS, CallInst::TCK_Tail);
@@ -6207,6 +6208,13 @@ int LLParser::ParseFence(Instruction *&Inst, PerFunctionState &PFS) {
     return TokError("fence cannot be monotonic");
 
   Inst = new FenceInst(Context, Ordering, Scope);
+  return InstNormal;
+}
+
+/// ParseNOP
+///   ::= 'nop'
+int LLParser::ParseNOP(Instruction *&Inst, PerFunctionState &PFS){
+  Inst = new NOPInst(Context);
   return InstNormal;
 }
 

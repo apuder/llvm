@@ -5197,6 +5197,11 @@ std::error_code BitcodeReader::parseFunctionBody(Function *F) {
       InstructionList.push_back(I);
       break;
     }
+    case bitc::FUNC_CODE_INST_NOP: {
+      I = new NOPInst(Context);
+      InstructionList.push_back(I);
+      break;
+    }
     case bitc::FUNC_CODE_INST_LOADATOMIC: {
        // LOADATOMIC: [opty, op, align, vol, ordering, synchscope]
       unsigned OpNum = 0;

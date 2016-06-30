@@ -2589,6 +2589,9 @@ void ModuleBitcodeWriter::writeInstruction(const Instruction &I,
       Vals.push_back(getEncodedSynchScope(cast<StoreInst>(I).getSynchScope()));
     }
     break;
+  case Instruction::NOP:
+    Code = bitc::FUNC_CODE_INST_NOP;
+    break;
   case Instruction::AtomicCmpXchg:
     Code = bitc::FUNC_CODE_INST_CMPXCHG;
     pushValueAndType(I.getOperand(0), InstID, Vals); // ptrty + ptr

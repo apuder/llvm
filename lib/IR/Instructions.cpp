@@ -4034,6 +4034,18 @@ InvokeInst *InvokeInst::cloneImpl() const {
   return new(getNumOperands()) InvokeInst(*this);
 }
 
+NOPInst::NOPInst(const NOPInst &SH)
+        : Instruction(SH.getType(), Instruction::NOP, nullptr, 0) {
+}
+
+NOPInst::NOPInst(LLVMContext &C)
+        : Instruction(Type::getVoidTy(C), Instruction::NOP, nullptr, 0) {
+}
+
+NOPInst *NOPInst::cloneImpl() const {
+  return new NOPInst(*this);
+}
+
 ResumeInst *ResumeInst::cloneImpl() const { return new (1) ResumeInst(*this); }
 
 CleanupReturnInst *CleanupReturnInst::cloneImpl() const {

@@ -2066,6 +2066,16 @@ GenericValue Interpreter::getOperandValue(Value *V, ExecutionContext &SF) {
   }
 }
 
+
+//===----------------------------------------------------------------------===//
+//                        Misc Instructions
+//===----------------------------------------------------------------------===//
+
+void Interpreter::visitNOPInst(NOPInst &I) {
+  ExecutionContext &SF = ECStack.back();
+  /* Do nothing */
+}
+
 //===----------------------------------------------------------------------===//
 //                        Dispatch and Execution Code
 //===----------------------------------------------------------------------===//
